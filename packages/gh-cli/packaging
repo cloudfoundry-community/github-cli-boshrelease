@@ -1,0 +1,10 @@
+set -o errexit
+set -o nounset
+set -o pipefail
+
+tar xvf gh-cli/gh_2.12.1_linux_amd64.tar.gz
+
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+cp -r gh-cli/gh_2.12.1_linux_amd64/bin ${BOSH_INSTALL_TARGET}/bin
+
+exit 0

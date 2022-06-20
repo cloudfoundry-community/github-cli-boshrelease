@@ -1,0 +1,5 @@
+---
+name: gh-cli-2
+dependencies: []
+files:
+- gh-cli/gh_2.12.1_linux_amd64.tar.gz
