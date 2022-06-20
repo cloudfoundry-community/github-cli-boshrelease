@@ -3,7 +3,7 @@ name: gh-cli
 packages: [gh-cli-2]
 templates:
   env: env
-  runtime-setup: runtime-setup
+  runtime-setup.sh: bin/runtime-setup
   token: .gh/token
 properties:
   protocol:
@@ -12,8 +12,5 @@ properties:
   hostname:
     description: "The hostname of the GitHub instance to authenticate with"
     default: "github.com"
-  scopes:
-    description: "Additional authentication scopes to request"
-    default: "repo,read:org"
   token:
     description: "The GitHub personal access token to use during authentication"

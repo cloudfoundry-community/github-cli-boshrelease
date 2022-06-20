@@ -1,14 +1,12 @@
 set -o errexit
 set -o nounset
-set -o pipefail
 
 echo "[gh] cli authentication in progress..."
 
 gh auth login \
-    -p <%= p("protocol") %> \
-    -h <%= p("hostname") %> \
-    -s <%= p("scopes") %> \
-    --with-token < /var/vcap/packages/gh/.gh/token
+    -p '<%= p("protocol") %>' \
+    -h '<%= p("hostname") %>' \
+    --with-token < /var/vcap/jobs/gh-cli/.gh/token
 
 echo "[gh] cli authentication successfully completed"
 

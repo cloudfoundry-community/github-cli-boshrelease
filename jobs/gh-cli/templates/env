@@ -1,8 +1,2 @@
-set -o errexit
-set -o nounset
-set -o pipefail
-
-export PATH=/var/vcap/packages/gh/bin:$PATH
-export GH_CONFIG_DIR=/var/vcap/packages/gh/.gh
-
-exit 0
+export PATH=/var/vcap/packages/gh-cli-2/bin:$PATH
+export GH_CONFIG_DIR=/var/vcap/jobs/gh-cli/.gh
