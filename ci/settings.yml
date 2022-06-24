@@ -1,0 +1,122 @@
+---
+meta:
+  name:    gh
+  release: GitHub CLI (v2+)
+  target:  main@pipes
+  url:     https://pipes.starkandwayne.com
+
+  initial_version: 0.1.0
+
+  manifest:
+    path: "manifests/gh-cli.yml"
+    operator_file_paths: "manifests/operators/credentials.yml" # comma separated list relative to repo root
+    vars: |-
+      token: ((github.access-token))
+
+  git:
+    email: ci@starkandwayne.com
+    name:  Stark & Wayne CI Bot
+
+  bosh-lite:
+    target:   ((thunder-dome.url))
+    username: ((thunder-dome.username))
+    password: ((thunder-dome.password))
+    cacert:   ((thunder-dome.ca-certificate))
+
+  aws:
+    access_key: ((cfcommunity.access)) # aws.access_key_id
+    secret_key: ((cfcommunity.secret)) # aws.secret_access_key
+
+  github:
+    owner:  starkandwayne
+    repo:   gh-boshrelease
+    branch: feature/ci
+    private_key:  ((github.private-key))
+    access_token: ((github.access-token))
+
+  shout:
+    url:      ((shout.url))
+    username: ((shout.username))
+    password: ((shout.password))
+
+groups:
+  - name: blobs
+    jobs:
+    - spruce
+
+jobs:
+  - name: spruce # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: spruce, trigger: true }
+    - task: update-spruce
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: spruce
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      spruce
+          BLOB_DIR:         spruce
+          BLOB_NAME:        spruce
+          BLOB_BINARY:      spruce-linux-amd64
+          BLOB_DESTINATION: spruce/spruce-linux-amd64
+          BLOB_CLEANUP:     spruce/spruce-linux-amd64
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+  # }}}
+
+resources:
+  - name: spruce # {{{
+    type: github-release
+    source:
+      user: geofffranks
+      repository: spruce
+      access_token: (( grab meta.github.access_token ))
+  # }}}
