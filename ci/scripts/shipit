@@ -23,6 +23,7 @@ header() {
 : ${REPO_OUT:?required}
 : ${BRANCH:?required}
 : ${GITHUB_OWNER:?required}
+: ${GITHUB_REPO:?required}
 : ${VERSION_FROM:?required}
 : ${AWS_ACCESS_KEY:?required}
 : ${AWS_SECRET_KEY:?required}
@@ -73,7 +74,7 @@ popd
 
 RELEASE_TGZ=$REPO_OUT/releases/$RELEASE_NAME/$RELEASE_NAME-$VERSION.tgz
 export RELEASE_SHA1=$(sha1sum $RELEASE_TGZ | head -n1 | awk '{print $1}')
-export RELEASE_URL="https://github.com/${GITHUB_OWNER}/${RELEASE_NAME}-boshrelease/releases/download/v${VERSION}/${RELEASE_NAME}-${VERSION}.tgz"
+export RELEASE_URL="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/download/v${VERSION}/${RELEASE_NAME}-${VERSION}.tgz"
 echo "RELEASE_SHA1=$RELEASE_SHA1"
 
 mkdir -p ${RELEASE_ROOT}/artifacts
@@ -115,5 +116,5 @@ git commit -m "release v${VERSION}"
 popd
 
 cat > ${NOTIFICATION_OUT:-notifications}/message <<EOS
-New ${RELEASE_NAME} v${VERSION} released. <https://github.com/${GITHUB_OWNER}/${RELEASE_NAME}-boshrelease/releases/tag/v${VERSION}|Release notes>.
+New ${RELEASE_NAME} v${VERSION} released. <https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases/tag/v${VERSION}|Release notes>.
 EOS
