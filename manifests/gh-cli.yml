@@ -29,4 +29,6 @@ update:
 
 releases:
 - name: gh-cli
-  version: latest
+  sha1: 76c28af7cabd0f03596469b27e913ba9e398af33
+  url: https://github.com/starkandwayne/gh-cli-boshrelease/releases/download/v0.2.0/gh-cli-0.2.0.tgz
+  version: 0.2.0
