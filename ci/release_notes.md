@@ -1,0 +1,1 @@
+* Add Concourse CI automation pipeline
