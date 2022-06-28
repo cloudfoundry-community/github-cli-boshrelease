@@ -30,7 +30,7 @@ meta:
   github:
     owner:  starkandwayne
     repo:   gh-boshrelease
-    branch: feature/ci
+    branch: main
     private_key:  ((github.private-key))
     access_token: ((github.access-token))
 
