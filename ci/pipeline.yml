@@ -282,7 +282,7 @@ jobs:
     - put: git
       params:
         rebase: true
-        repository: pushme/git
+        repository: pushme
     - put: s3-tarball
       params:
         file:  (( concat "gh/artifacts/" meta.name "-*.tgz" ))

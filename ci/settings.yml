@@ -95,7 +95,7 @@ jobs:
     - put: git
       params:
         rebase: true
-        repository: pushme/git
+        repository: pushme
       on_success:
         put: notify
         params:
