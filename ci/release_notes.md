@@ -1,1 +1,0 @@
-* Fixed deployment URL in GitHub release notes
