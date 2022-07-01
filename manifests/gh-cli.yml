@@ -11,7 +11,8 @@ instance_groups:
   jobs:
   - name: gh-cli
     release: gh-cli
-    properties: {}
+    properties:
+      installation_only: true
 
 variables: []
 
@@ -29,6 +30,4 @@ update:
 
 releases:
 - name: gh-cli
-  sha1: 6578d34f87d870c95d956dd0313b2b525df5d1db
-  url: https://github.com/starkandwayne/gh-boshrelease/releases/download/v0.3.1/gh-cli-0.3.1.tgz
-  version: 0.3.1
+  version: latest

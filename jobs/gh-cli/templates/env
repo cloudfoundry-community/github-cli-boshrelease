@@ -1,2 +1,6 @@
 export PATH=/var/vcap/packages/gh-cli-2/bin:$PATH
+<% if properties.installation_only -%>
+export GH_CONFIG_DIR=$HOME/.gh
+<% else -%>
 export GH_CONFIG_DIR=/var/vcap/jobs/gh-cli/.gh
+<% end -%>

@@ -3,8 +3,7 @@ name: gh-cli
 packages: [gh-cli-2]
 templates:
   env: env
-  runtime-setup.sh: bin/runtime-setup
-  token: .gh/token
+  hosts.yml: .gh/hosts.yml
 properties:
   protocol:
     description: "The protocol to use for git operations: {ssh|https}"
@@ -12,5 +11,12 @@ properties:
   hostname:
     description: "The hostname of the GitHub instance to authenticate with"
     default: "github.com"
+  username:
+    description: "The GitHub username of the authenticated user"
   token:
-    description: "The GitHub personal access token to use during authentication"
+    description: "The GitHub personal access token to use"
+  hosts_file:
+    description: "Explicit content of the configuration file ~/.gh/hosts.yaml"
+  installation_only:
+    description: "Whether the command line should only be installed and not pre-configured"
+    default: false
