@@ -10,8 +10,7 @@ meta:
   manifest:
     path: "manifests/gh-cli.yml"
     operator_file_paths: "manifests/operators/credentials.yml" # comma separated list relative to repo root
-    vars: |-
-      token: ((github.access-token))
+    vars: ""
 
   git:
     email: ci@starkandwayne.com
