@@ -1,9 +1,9 @@
 set -o errexit
 set -o nounset
 
-tar xvf gh-cli/gh_2.12.1_linux_amd64.tar.gz
+tar xvf gh-cli/gh_2.42.1_linux_amd64.tar.gz
 
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-cp -r gh_2.12.1_linux_amd64/bin/* ${BOSH_INSTALL_TARGET}/bin
+cp -r gh_2.42.1_linux_amd64/bin/* ${BOSH_INSTALL_TARGET}/bin
 
 exit 0
