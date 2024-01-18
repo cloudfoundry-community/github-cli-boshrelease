@@ -1,0 +1,17 @@
+name: gh-cli
+version: 0.6.0
+commit_hash: 2ef753b
+uncommitted_changes: false
+jobs:
+- name: gh-cli
+  version: 324cecc3391008e04e6d71b01f5f86c0879d4cf9098ac766975aecdd3b7d8fe2
+  fingerprint: 324cecc3391008e04e6d71b01f5f86c0879d4cf9098ac766975aecdd3b7d8fe2
+  sha1: sha256:0756a5a4cb2bd4161365eab5ed99c549919e4c47015f0d7b85b42022c2136a42
+  packages:
+  - gh-cli-2
+packages:
+- name: gh-cli-2
+  version: 4f6eeb99333e6bdd9a40a59507e1e82b1a057ac9de7241e8a8844727f6199d7f
+  fingerprint: 4f6eeb99333e6bdd9a40a59507e1e82b1a057ac9de7241e8a8844727f6199d7f
+  sha1: sha256:c4fed9f2efd97c38180f1eb6a93ccccffcf48a9ccb2801378e5b4c5dbb367af6
+  dependencies: []
